@@ -1,0 +1,62 @@
+#write a function to calculate how much it costs to ship a package of given weight for normal ground shipping
+
+#flat_charge = 20
+#calculate shipping charge for standard ground shipping by weight plus the flat charge
+def ground_shipping(weight):
+  if weight <= 2:
+    price_per_pound = 1.50 
+  elif weight <= 6:
+    price_per_pound = 3.00
+  elif weight <= 10 :
+    price_per_pound = 4.00
+  else:
+    price_per_pound = 4.75
+  return 20 + (price_per_pound * weight)
+
+#test print(ground_shipping(8.4))
+#premium shipping doesn't need to be a variable because price doesn't change with the weight of the package
+
+premium_ground_shipping = 125
+
+# this function calculates the cost of shipping a package by weight but no flat charge, sent with drone
+def drone_shipping(weight):
+  if weight <= 2:
+    price_per_pound = 4.50 
+  elif weight <= 6:
+    price_per_pound = 9.00
+  elif weight <= 10 :
+    price_per_pound = 12.00
+  else:
+    price_per_pound = 14.25
+
+  return price_per_pound * weight
+  
+#test print(drone_shipping(1.5))
+
+
+#this function determines which method is the cheapest by process of elimination and then calculate the cost
+def print_cheapest_shipping_method(weight):
+  
+  ground = ground_shipping(weight)
+  premium = premium_ground_shipping
+  drone = drone_shipping(weight)
+
+  if ground < premium and ground < drone:
+    method = "standard ground"
+    cost = ground
+  elif premium < ground and premium < drone:
+    method = "premium ground"
+    cost = premium
+  else:
+    method = drone
+    cost = drone
+
+#write a print statement that uses a string and then passes in the variables of cost and method
+
+  print(
+      "The cheapest option available is $%.2f with %s shipping." 
+      % (cost, method))
+#testing what is the cheapest method of shipping a package weighing 4.8lbs and what would it cost
+print_cheapest_shipping_method(4.8)
+#testing what is the cheapest method of shipping a package weighing 41.5lbs and what would it cost
+print_cheapest_shipping_method(41.5)
